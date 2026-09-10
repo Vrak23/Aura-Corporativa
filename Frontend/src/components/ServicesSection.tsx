@@ -1,48 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { User, Wrench, Settings, FileSpreadsheet, ChevronRight, CheckCircle2 } from 'lucide-react';
 import { servicesData } from '../data/servicesData';
-import { servicioService } from '../services/servicioService';
-import type { ServicioDTO, ServiceItem } from '../types';
-
-const serviceIconNames: ServiceItem['iconName'][] = ['users', 'calculator', 'briefcase', 'folderCheck'];
-
-const mapServicioToServiceItem = (service: ServicioDTO, index: number): ServiceItem => ({
-  id: String(service.id),
-  title: service.titulo,
-  tagline: service.descripcion_corta || service.descripcion,
-  badge: 'Servicio',
-  iconName: serviceIconNames[index % serviceIconNames.length],
-  description: service.descripcion,
-  includes: Array.isArray(service.incluye) ? service.incluye : (typeof service.incluye === "string" ? JSON.parse(service.incluye) : []),
-  keyBenefits: [],
-});
+import type { ServiceItem } from '../types';
 
 export const ServicesSection: React.FC = () => {
-  const [services, setServices] = useState<ServiceItem[]>(servicesData);
+  const [services] = useState<ServiceItem[]>(servicesData);
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
   const [isClosing, setIsClosing] = useState(false);
-
-  useEffect(() => {
-    let isMounted = true;
-
-    const loadServices = async () => {
-      try {
-        const apiServices = await servicioService.getServicios();
-        if (isMounted && apiServices && apiServices.length > 0) {
-          setServices(apiServices.map((service, index) => mapServicioToServiceItem(service, index)));
-        }
-      } catch (error) {
-        // Silently preserve local static services without interrupting UI
-        console.warn('Usando servicios locales:', error);
-      }
-    };
-
-    void loadServices();
-
-    return () => {
-      isMounted = false;
-    };
-  }, []);
 
   const handleOpenService = (service: ServiceItem) => {
     setIsClosing(false);
