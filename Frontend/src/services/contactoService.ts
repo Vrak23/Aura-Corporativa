@@ -1,6 +1,4 @@
-import { supabase } from './supabaseClient';
-import { api } from './api';
-import type { ApiResponse } from './api';
+import { siteConfig } from '../config/siteConfig';
 
 export interface ContactoPayload {
   nombre: string;
@@ -11,35 +9,39 @@ export interface ContactoPayload {
 }
 
 export const contactoService = {
-  async enviarContacto(payload: ContactoPayload): Promise<ApiResponse<void>> {
-    try {
-      const { error } = await supabase.from('contactos').insert([
-        {
-          nombre: payload.nombre,
-          email: payload.email,
-          telefono: payload.telefono || null,
-          servicio: payload.servicio || null,
-          mensaje: payload.mensaje,
-        },
-      ]);
+  async enviarContacto(payload: ContactoPayload): Promise<{ success: boolean; message: string }> {
+    // FormSubmit endpoint: Envía el mensaje directamente a ventas@zwecorporativa.com
+    const destinationEmail = siteConfig.contact.email.primary;
+    const formSubmitUrl = `https://formsubmit.co/ajax/${destinationEmail}`;
 
-      if (!error) {
-        // Notificar en segundo plano al backend si estuviera activo
-        try {
-          void api.post('/contacto', payload).catch(() => {});
-        } catch (_) {}
+    const response = await fetch(formSubmitUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+      },
+      body: JSON.stringify({
+        Nombre: payload.nombre,
+        Email: payload.email,
+        Telefono: payload.telefono || 'No especificado',
+        Servicio: payload.servicio || 'Consulta General',
+        Mensaje: payload.mensaje,
+        _subject: `🚀 Nuevo Lead Web - Aura Corporativa: ${payload.nombre}`,
+        _template: 'table',
+        _captcha: 'false',
+      }),
+    });
 
-        return {
-          success: true,
-          message: '¡Gracias por contactarnos! Tu solicitud ha sido registrada correctamente.',
-        };
-      }
-      console.warn('[Supabase Contactos Error]:', error.message);
-    } catch (err) {
-      console.warn('[Supabase Network]:', err);
+    if (!response.ok) {
+      throw new Error('Error al enviar el formulario por FormSubmit');
     }
 
-    // Fallback a API Laravel local
-    return await api.post<ApiResponse<void>>('/contacto', payload);
+    const data = await response.json();
+    return {
+      success: true,
+      message: data.message || '¡Gracias por contactarnos! Tu solicitud ha sido enviada con éxito.',
+    };
   },
 };
+
+export default contactoService;
