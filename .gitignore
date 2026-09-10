@@ -1,0 +1,24 @@
+# Dependencies
+node_modules/
+vendor/
+
+# Production builds
+dist/
+build/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Logs and databases
+*.log
+*.sqlite
+
+# IDE & OS files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+.playwright-mcp/
