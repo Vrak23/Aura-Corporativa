@@ -1,6 +1,7 @@
 {
-  "dependencies": {
-    "@tailwindcss/vite": "^4.3.3",
-    "tailwindcss": "^4.3.3"
+  "name": "aura-corporativa",
+  "private": true,
+  "scripts": {
+    "build": "cd Frontend && npm install && npm run build"
   }
 }
