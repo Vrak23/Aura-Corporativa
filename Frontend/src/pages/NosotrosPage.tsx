@@ -49,22 +49,22 @@ export const NosotrosPage: React.FC = () => {
           </p>
 
           {/* Quick Metrics Bar en Dark Surfaces */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mt-10 max-w-4xl mx-auto">
-            <div className="bg-slate-900/70 backdrop-blur-xs p-5 rounded-2xl border border-slate-800 shadow-lg text-center group hover:border-red-500/50 hover:bg-slate-900 transition-all">
-              <div className="text-2xl sm:text-3xl font-black text-white group-hover:text-[#DC2626] transition-colors">100%</div>
-              <div className="text-xs sm:text-sm font-medium text-slate-400 mt-1">Cumplimiento Legal</div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-6 mt-10 max-w-4xl mx-auto">
+            <div className="bg-slate-900/70 backdrop-blur-xs p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-800 shadow-lg text-center group hover:border-red-500/50 hover:bg-slate-900 transition-all flex flex-col justify-center items-center">
+              <div className="text-xl sm:text-2xl md:text-3xl font-black text-white group-hover:text-[#DC2626] transition-colors">100%</div>
+              <div className="text-[11px] sm:text-xs md:text-sm font-medium text-slate-400 mt-1 leading-tight">Cumplimiento Legal</div>
             </div>
-            <div className="bg-slate-900/70 backdrop-blur-xs p-5 rounded-2xl border border-slate-800 shadow-lg text-center group hover:border-red-500/50 hover:bg-slate-900 transition-all">
-              <div className="text-2xl sm:text-3xl font-black text-white group-hover:text-[#DC2626] transition-colors">Nacional</div>
-              <div className="text-xs sm:text-sm font-medium text-slate-400 mt-1">Cobertura en Perú</div>
+            <div className="bg-slate-900/70 backdrop-blur-xs p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-800 shadow-lg text-center group hover:border-red-500/50 hover:bg-slate-900 transition-all flex flex-col justify-center items-center">
+              <div className="text-xl sm:text-2xl md:text-3xl font-black text-white group-hover:text-[#DC2626] transition-colors">Nacional</div>
+              <div className="text-[11px] sm:text-xs md:text-sm font-medium text-slate-400 mt-1 leading-tight">Cobertura en Perú</div>
             </div>
-            <div className="bg-slate-900/70 backdrop-blur-xs p-5 rounded-2xl border border-slate-800 shadow-lg text-center group hover:border-red-500/50 hover:bg-slate-900 transition-all">
-              <div className="text-2xl sm:text-3xl font-black text-white group-hover:text-[#DC2626] transition-colors">24/7</div>
-              <div className="text-xs sm:text-sm font-medium text-slate-400 mt-1">Soporte Operativo</div>
+            <div className="bg-slate-900/70 backdrop-blur-xs p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-800 shadow-lg text-center group hover:border-red-500/50 hover:bg-slate-900 transition-all flex flex-col justify-center items-center">
+              <div className="text-xl sm:text-2xl md:text-3xl font-black text-white group-hover:text-[#DC2626] transition-colors">24/7</div>
+              <div className="text-[11px] sm:text-xs md:text-sm font-medium text-slate-400 mt-1 leading-tight">Soporte Operativo</div>
             </div>
-            <div className="bg-slate-900/70 backdrop-blur-xs p-5 rounded-2xl border border-slate-800 shadow-lg text-center group hover:border-red-500/50 hover:bg-slate-900 transition-all">
-              <div className="text-2xl sm:text-3xl font-black text-white group-hover:text-[#DC2626] transition-colors">B2B</div>
-              <div className="text-xs sm:text-sm font-medium text-slate-400 mt-1">Soluciones a Medida</div>
+            <div className="bg-slate-900/70 backdrop-blur-xs p-3.5 sm:p-5 rounded-xl sm:rounded-2xl border border-slate-800 shadow-lg text-center group hover:border-red-500/50 hover:bg-slate-900 transition-all flex flex-col justify-center items-center">
+              <div className="text-xl sm:text-2xl md:text-3xl font-black text-white group-hover:text-[#DC2626] transition-colors">B2B</div>
+              <div className="text-[11px] sm:text-xs md:text-sm font-medium text-slate-400 mt-1 leading-tight">Soluciones a Medida</div>
             </div>
           </div>
         </div>
@@ -73,8 +73,8 @@ export const NosotrosPage: React.FC = () => {
       {/* =========================================================================
           2. PILARES & VALORES CORPORATIVOS (CULTURA AURA)
          ========================================================================= */}
-      <section className="py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-14">
+      <section className="py-16 sm:py-20 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-10 sm:mb-14">
           <h2 className="text-2xl sm:text-4xl font-extrabold text-[#0B192C] tracking-tight">
             Los Pilares que Guían <span className="text-[#DC2626]">Nuestra Labor</span>
           </h2>
@@ -83,59 +83,59 @@ export const NosotrosPage: React.FC = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           {/* Pilar 1 */}
-          <div className="bg-[#0B192C] p-8 rounded-2xl border-2 border-[#0B192C] shadow-xs hover:border-[#DC2626] hover:shadow-[0_0_0_3px_rgba(220,38,38,0.16)] transition-all duration-500 flex flex-col justify-between">
+          <div className="bg-[#0B192C] p-6 sm:p-8 rounded-2xl border-2 border-[#0B192C] shadow-xs hover:border-[#DC2626] hover:shadow-[0_0_0_3px_rgba(220,38,38,0.16)] transition-all duration-500 flex flex-col justify-between">
             <div className="flex w-full flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-2xl bg-white/10 text-[#DC2626] flex items-center justify-center mb-6 shadow-xs">
-                <ShieldCheck size={28} />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 text-[#DC2626] flex items-center justify-center mb-4 sm:mb-6 shadow-xs">
+                <ShieldCheck size={26} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">
                 Transparencia & Rigor Legal
               </h3>
-              <p className="text-slate-300 text-sm leading-relaxed">
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                 Gestión estricta bajo el marco legal laboral de Sunafil y Sunat. Cero contingencias y total tranquilidad para nuestros socios.
               </p>
             </div>
-            <div className="pt-6 mt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-slate-300">
+            <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-slate-300 justify-center">
               <CheckCircle2 size={16} className="text-[#DC2626]" />
               <span>Garantía de cumplimiento</span>
             </div>
           </div>
 
           {/* Pilar 2 */}
-          <div className="bg-[#0B192C] p-8 rounded-2xl border-2 border-[#0B192C] shadow-xs hover:border-[#DC2626] hover:shadow-[0_0_0_3px_rgba(220,38,38,0.16)] transition-all duration-500 flex flex-col justify-between">
+          <div className="bg-[#0B192C] p-6 sm:p-8 rounded-2xl border-2 border-[#0B192C] shadow-xs hover:border-[#DC2626] hover:shadow-[0_0_0_3px_rgba(220,38,38,0.16)] transition-all duration-500 flex flex-col justify-between">
             <div className="flex w-full flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-2xl bg-white/10 text-[#DC2626] flex items-center justify-center mb-6 shadow-xs">
-                <Users size={28} />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 text-[#DC2626] flex items-center justify-center mb-4 sm:mb-6 shadow-xs">
+                <Users size={26} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">
                 Enfoque en el Factor Humano
               </h3>
-              <p className="text-slate-300 text-sm leading-relaxed">
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                 Valoramos y cuidamos al colaborador. Un equipo motivado y respaldado brinda el más alto rendimiento en las operaciones de su empresa.
               </p>
             </div>
-            <div className="pt-6 mt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-slate-300">
+            <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-slate-300 justify-center">
               <CheckCircle2 size={16} className="text-[#DC2626]" />
               <span>Gestión humana integral</span>
             </div>
           </div>
 
           {/* Pilar 3 */}
-          <div className="bg-[#0B192C] p-8 rounded-2xl border-2 border-[#0B192C] shadow-xs hover:border-[#DC2626] hover:shadow-[0_0_0_3px_rgba(220,38,38,0.16)] transition-all duration-500 flex flex-col justify-between">
+          <div className="bg-[#0B192C] p-6 sm:p-8 rounded-2xl border-2 border-[#0B192C] shadow-xs hover:border-[#DC2626] hover:shadow-[0_0_0_3px_rgba(220,38,38,0.16)] transition-all duration-500 flex flex-col justify-between">
             <div className="flex w-full flex-col items-center text-center">
-              <div className="w-14 h-14 rounded-2xl bg-white/10 text-[#DC2626] flex items-center justify-center mb-6 shadow-xs">
-                <TrendingUp size={28} />
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-white/10 text-[#DC2626] flex items-center justify-center mb-4 sm:mb-6 shadow-xs">
+                <TrendingUp size={26} />
               </div>
-              <h3 className="text-xl font-bold text-white mb-3">
+              <h3 className="text-lg sm:text-xl font-bold text-white mb-2 sm:mb-3">
                 Agilidad & Respuesta Inmediata
               </h3>
-              <p className="text-slate-300 text-sm leading-relaxed">
+              <p className="text-slate-300 text-xs sm:text-sm leading-relaxed">
                 Reclutamiento ágil, reemplazos oportunos y resolución ejecutiva para que las operaciones de su negocio nunca se detengan.
               </p>
             </div>
-            <div className="pt-6 mt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-slate-300">
+            <div className="pt-4 sm:pt-6 mt-4 sm:mt-6 border-t border-white/10 flex items-center gap-2 text-xs font-bold text-slate-300 justify-center">
               <CheckCircle2 size={16} className="text-[#DC2626]" />
               <span>Continuidad operativa asegurada</span>
             </div>
@@ -146,44 +146,45 @@ export const NosotrosPage: React.FC = () => {
       {/* =========================================================================
           3. SECCIÓN DE VIDEO CORPORATIVO (PREMIUM CONTAINER)
          ========================================================================= */}
-      <section className="py-20 bg-[#0B192C] text-white relative overflow-hidden">
+      <section className="py-16 sm:py-20 bg-[#0B192C] text-white relative overflow-hidden">
         {/* Glow azul marino y acentos */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-          <div className="text-center mb-12">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-red-400 text-xs font-bold uppercase tracking-wider mb-4">
+          <div className="text-center mb-8 sm:mb-12">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-red-400 text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4">
               <Video size={14} />
               <span>Experiencia Audiovisual</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
               Aura Corporativa en <span className="text-[#DC2626]">Movimiento</span>
             </h2>
-            <p className="text-slate-400 text-sm sm:text-base mt-2 max-w-xl mx-auto">
+            <p className="text-slate-400 text-xs sm:text-base mt-2 max-w-xl mx-auto">
               Conoce nuestras instalaciones, testimonios de clientes y metodología de trabajo en terreno.
             </p>
           </div>
 
-          {/* Video Container Frame */}
-          <div className="relative rounded-3xl overflow-hidden bg-slate-950 border border-slate-800/80 shadow-2xl aspect-video max-w-4xl mx-auto flex flex-col items-center justify-center p-8 text-center group cursor-pointer">
+          {/* Video Container Frame Responsive */}
+          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 border border-slate-800/80 shadow-2xl min-h-[260px] sm:aspect-video max-w-4xl mx-auto flex flex-col items-center justify-center p-6 sm:p-10 text-center group cursor-pointer">
             {/* Background Grid Texture */}
             <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
 
             {/* Play Button Icon */}
-            <div className="relative z-10 w-24 h-24 rounded-full bg-[#DC2626] hover:bg-red-700 text-white flex items-center justify-center mb-6 shadow-2xl shadow-red-600/40 group-hover:scale-110 group-active:scale-95 transition-all duration-300">
-              <Play size={40} className="ml-1 fill-white" />
+            <div className="relative z-10 w-16 h-16 sm:w-20 md:w-24 sm:h-20 md:h-24 rounded-full bg-[#DC2626] hover:bg-red-700 text-white flex items-center justify-center mb-4 sm:mb-6 shadow-2xl shadow-red-600/40 group-hover:scale-110 group-active:scale-95 transition-all duration-300">
+              <Play size={28} className="ml-1 sm:hidden fill-white" />
+              <Play size={36} className="ml-1 hidden sm:block fill-white" />
             </div>
 
-            <h3 className="relative z-10 text-xl sm:text-2xl font-bold text-white mb-2">
+            <h3 className="relative z-10 text-lg sm:text-2xl font-bold text-white mb-2">
               Espacio para Video Institucional Oficial
             </h3>
-            <p className="relative z-10 text-xs sm:text-sm text-slate-400 max-w-lg leading-relaxed">
+            <p className="relative z-10 text-xs sm:text-sm text-slate-400 max-w-lg leading-relaxed px-2">
               Listo para integrar la presentación oficial en video (YouTube, Vimeo o archivo MP4 directo) en cuanto sea suministrado.
             </p>
 
             {/* Bottom Status Tag */}
-            <div className="absolute bottom-4 right-4 z-10 flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-700 text-[11px] text-slate-300 font-medium">
+            <div className="mt-4 sm:mt-0 sm:absolute sm:bottom-4 sm:right-4 z-10 flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-700 text-[11px] text-slate-300 font-medium">
               <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
               <span>Contenedor listo para inserción</span>
             </div>

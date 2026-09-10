@@ -172,7 +172,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
                 onClick={() => handleToggle(false)}
                 className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center justify-between transition-colors ' + (isNosotros ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
               >
-                <span>Nosotros (Fotos, Videos & Redes)</span>
+                <span>Nosotros</span>
                 <ArrowRight size={18} className="opacity-40" />
               </Link>
 
