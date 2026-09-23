@@ -4,6 +4,7 @@ export interface ServiceItem {
   tagline: string;
   badge: string;
   iconName: 'users' | 'calculator' | 'briefcase' | 'folderCheck';
+  image?: string;
   description: string;
   includes: string[];
   keyBenefits: string[];

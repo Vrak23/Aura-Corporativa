@@ -1,38 +1,80 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { Target, Eye, ShieldCheck, ArrowRight } from 'lucide-react';
 import aboutImage from '../assets/about_handshake.jpg';
 
 export const AboutSection: React.FC = () => {
   return (
-    <section id="nosotros" className="relative overflow-hidden py-20 bg-white">
-      <div className="absolute -left-20 top-16 h-40 w-40 rounded-full border border-[#0D1B2A]/[0.06]" />
+    <section id="nosotros" className="relative overflow-hidden py-24 bg-white">
+      <div className="absolute -left-20 top-16 h-40 w-40 rounded-full border border-[#0D1B2A]/[0.06] pointer-events-none" />
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-14 items-center">
-          {/* Left Column matching mockup */}
-          <div>
-            <div className="mb-4 h-1 w-12 rounded-full bg-[#0D1B2A]" />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column */}
+          <div className="lg:col-span-7">
+            <div className="mb-4 h-1.5 w-12 rounded-full bg-[#0D1B2A]" />
             <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
               Sobre <span className="text-[#DC2626]">Nosotros</span>
             </h2>
             <h3 className="text-xl font-bold text-slate-800 mt-2.5 mb-4">
-              Nuestra Misión, Visión y Valores
+              Socios estratégicos en gestión y desarrollo del talento humano
             </h3>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-4">
-              En <strong className="text-slate-900 font-semibold">Aura Corporativa</strong> nos especializamos en la tercerización integral de personal y la administración estratégica de procesos empresariales.
+              En <strong className="text-slate-900 font-semibold">Aura Corporativa</strong> nos especializamos en la tercerización integral de personal, administración de planillas y soporte estratégico empresarial a nivel nacional.
             </p>
             <p className="text-sm sm:text-base text-slate-600 leading-relaxed mb-6">
-              Nuestra misión es acompañar a las empresas a optimizar sus tiempos y recursos mediante soluciones eficientes, transparentes y 100% apegadas al marco normativo vigente.
+              Acompañamos a las empresas a optimizar sus tiempos y costos operativos mediante soluciones ágiles, transparentes y 100% apegadas al marco normativo vigente.
             </p>
 
+            {/* Misión, Visión, Valores Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 mb-8">
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                <div className="w-8 h-8 rounded-lg bg-red-50 text-[#DC2626] flex items-center justify-center mb-2">
+                  <Target size={18} />
+                </div>
+                <h4 className="font-bold text-slate-900 text-sm mb-1">Misión</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Impulsar la productividad de nuestros clientes con talento calificado y gestión impecable.
+                </p>
+              </div>
 
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                <div className="w-8 h-8 rounded-lg bg-red-50 text-[#DC2626] flex items-center justify-center mb-2">
+                  <Eye size={18} />
+                </div>
+                <h4 className="font-bold text-slate-900 text-sm mb-1">Visión</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Ser el referente líder en soluciones integrales de capital humano en el Perú.
+                </p>
+              </div>
+
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                <div className="w-8 h-8 rounded-lg bg-red-50 text-[#DC2626] flex items-center justify-center mb-2">
+                  <ShieldCheck size={18} />
+                </div>
+                <h4 className="font-bold text-slate-900 text-sm mb-1">Valores</h4>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  Transparencia, rigor legal, agilidad y compromiso ético con las personas.
+                </p>
+              </div>
+            </div>
+
+            <Link
+              to="/nosotros"
+              className="inline-flex items-center gap-2 text-sm font-bold text-[#DC2626] hover:text-red-700 transition-colors group"
+            >
+              <span>Conocer más sobre Aura Corporativa</span>
+              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+            </Link>
           </div>
 
-          {/* Right Column: Photo matching mockup */}
-          <div className="relative">
-            <div className="rounded-xl overflow-hidden shadow-md border border-[#0D1B2A]/15 ring-1 ring-[#0D1B2A]/[0.03]">
+          {/* Right Column: Photo with subtle frame */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative rounded-2xl overflow-hidden shadow-xl border border-slate-100">
               <img
                 src={aboutImage}
                 alt="Sobre Nosotros - Aura Corporativa"
-                className="w-full h-auto object-cover max-h-[340px]"
+                className="w-full h-full object-cover min-h-[320px]"
+                loading="lazy"
               />
             </div>
           </div>
@@ -41,3 +83,4 @@ export const AboutSection: React.FC = () => {
     </section>
   );
 };
+

@@ -1,4 +1,8 @@
 import type { ServiceItem, FAQItem } from '../types';
+import imgTercerizacion from '../assets/tercerizacion_personal.png';
+import imgPlanillas from '../assets/administracion_planillas.png';
+import imgGestion from '../assets/gestion_personal.png';
+import imgSoporte from '../assets/soporte_administrativo.png';
 
 export const servicesData: ServiceItem[] = [
   {
@@ -7,6 +11,7 @@ export const servicesData: ServiceItem[] = [
     tagline: 'Selección y gestión del talento que tu operación requiere',
     badge: 'Servicio Principal',
     iconName: 'users',
+    image: imgTercerizacion,
     description:
       'Nos encargamos de la búsqueda, selección, contratación y gestión del personal que tu empresa necesita, de acuerdo con el servicio contratado.',
     includes: [
@@ -29,6 +34,7 @@ export const servicesData: ServiceItem[] = [
     tagline: 'Cálculo exacto y puntual de todas tus obligaciones laborales',
     badge: 'Especializado',
     iconName: 'calculator',
+    image: imgPlanillas,
     description:
       'Gestionamos el proceso de planillas y las obligaciones relacionadas con tus trabajadores, manteniendo la información laboral organizada y actualizada.',
     includes: [
@@ -52,6 +58,7 @@ export const servicesData: ServiceItem[] = [
     tagline: 'Acompañamiento en todo el ciclo laboral del colaborador',
     badge: 'Gestión 360°',
     iconName: 'briefcase',
+    image: imgGestion,
     description:
       'Administramos el ciclo laboral de tus trabajadores, desde su incorporación hasta el término de la relación laboral.',
     includes: [
@@ -75,6 +82,7 @@ export const servicesData: ServiceItem[] = [
     tagline: 'Procesos ordenados y eficientes para optimizar tu tiempo',
     badge: 'Eficiencia Operativa',
     iconName: 'folderCheck',
+    image: imgSoporte,
     description:
       'Asumimos procesos administrativos que permiten a tu empresa trabajar de manera más ordenada y eficiente.',
     includes: [

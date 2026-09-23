@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { LandingPage } from './pages/LandingPage';
 import { NosotrosPage } from './pages/NosotrosPage';
@@ -9,12 +9,23 @@ import { ScrollToTopButton } from './components/ScrollToTopButton';
 import { LegalModal } from './components/LegalModal';
 import type { LegalModalType } from './components/LegalModal';
 
+function ScrollToTopOnRoute() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 export function App() {
   const [legalModal, setLegalModal] = useState<LegalModalType>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
     <BrowserRouter>
+      <ScrollToTopOnRoute />
       <div className="min-h-screen bg-white text-slate-800 flex flex-col font-sans">
         {/* Encabezado con Enrutamiento */}
         <Navbar isMenuOpen={isMobileMenuOpen} onMenuToggle={setIsMobileMenuOpen} />

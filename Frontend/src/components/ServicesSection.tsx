@@ -1,190 +1,70 @@
-import React, { useState, useEffect } from 'react';
-import { User, Wrench, Settings, FileSpreadsheet, ChevronRight, CheckCircle2 } from 'lucide-react';
+import React from 'react';
 import { servicesData } from '../data/servicesData';
-import type { ServiceItem } from '../types';
 
 export const ServicesSection: React.FC = () => {
-  const [services] = useState<ServiceItem[]>(servicesData);
-  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
-  const [isClosing, setIsClosing] = useState(false);
-
-  const handleOpenService = (service: ServiceItem) => {
-    setIsClosing(false);
-    setSelectedService(service);
-  };
-
-  const handleCloseService = () => {
-    setIsClosing(true);
-    setTimeout(() => {
-      setSelectedService(null);
-      setIsClosing(false);
-    }, 200); // matches animation duration
-  };
-
-  // Close on Escape key press
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape' && selectedService) {
-        handleCloseService();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
-    return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [selectedService]);
-
-  useEffect(() => {
-    if (!selectedService) {
-      return;
-    }
-
-    const previousOverflow = document.body.style.overflow;
-    document.body.style.overflow = 'hidden';
-
-    return () => {
-      document.body.style.overflow = previousOverflow;
-    };
-  }, [selectedService]);
-
-  const getServiceIcon = (iconName: ServiceItem['iconName']) => {
-    switch (iconName) {
-      case 'users':
-        return User;
-      case 'calculator':
-        return FileSpreadsheet;
-      case 'briefcase':
-        return Wrench;
-      case 'folderCheck':
-      default:
-        return Settings;
-    }
-  };
-
   return (
-    <section id="servicios" className="py-20 bg-slate-50/70">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Title matching mockup */}
-        <div className="text-center mb-14">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+    <section id="servicios" className="py-24 bg-slate-50/70">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 xl:px-10">
+        {/* Title matching Aura brand */}
+        <div className="text-center mb-16 sm:mb-20">
+          <div className="mx-auto mb-4 h-1.5 w-14 rounded-full bg-[#0D1B2A]" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
             Nuestros <span className="text-[#DC2626]">Servicios</span>
           </h2>
+          <p className="mt-4 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
+            Soluciones integrales de tercerización, planillas y gestión humana adaptadas a las necesidades de tu empresa.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service) => {
-            const Icon = getServiceIcon(service.iconName);
-            return (
-              <div
-                key={service.id}
-                role="button"
-                tabIndex={0}
-                onClick={() => handleOpenService(service)}
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    handleOpenService(service);
-                  }
-                }}
-                className="group relative overflow-hidden bg-white rounded-xl p-6 sm:p-7 shadow-xs hover:shadow-xl border border-slate-100 hover:border-[#0D1B2A]/30 flex flex-col items-center text-center justify-between cursor-pointer transition-all duration-300 ease-out hover:-translate-y-1.5 active:scale-[0.98] select-none"
-              >
-                {/* Subtle top indicator on hover */}
-                <div className="absolute top-0 inset-x-8 h-0.5 bg-gradient-to-r from-transparent via-[#0D1B2A]/30 to-transparent group-hover:via-[#DC2626] transition-all duration-300 rounded-full" />
-                <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full border border-[#0D1B2A]/10 transition-transform duration-500 group-hover:scale-125" />
-                <span className="absolute right-4 top-4 text-xs font-bold tracking-widest text-[#0D1B2A]/25 group-hover:text-[#DC2626]/50 transition-colors">
-                  {String(services.indexOf(service) + 1).padStart(2, '0')}
-                </span>
-
-                <div>
-                  {/* Red circular icon with smooth pulse and scale on card hover/click */}
-                  <div className="w-14 h-14 rounded-full bg-[#DC2626] text-white flex items-center justify-center mb-5 shadow-xs ring-4 ring-[#0D1B2A]/[0.06] mx-auto transition-transform duration-300 ease-out group-hover:scale-110 group-hover:shadow-md group-hover:ring-[#DC2626]/10 group-active:scale-95">
-                    <Icon size={26} className="transition-transform duration-300 group-hover:rotate-6" />
+        {/* Stack of services: Full-bleed image left, padded content right */}
+        <div className="space-y-12 sm:space-y-16">
+          {servicesData.map((service) => (
+            <div
+              key={service.id}
+              className="bg-white shadow-sm hover:shadow-md transition-shadow rounded-3xl overflow-hidden grid grid-cols-1 lg:grid-cols-12 items-stretch"
+            >
+              {/* Left Column: Full-bleed Large Image filling entire left container */}
+              <div className="lg:col-span-6 xl:col-span-6 relative min-h-[300px] sm:min-h-[360px] lg:min-h-full bg-slate-100">
+                {service.image ? (
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover object-center absolute inset-0"
+                    loading="lazy"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-slate-100 flex items-center justify-center text-slate-400">
+                    <span>{service.title}</span>
                   </div>
-
-                  {/* Title */}
-                  <h3 className="text-lg font-bold text-slate-900 mb-2.5 group-hover:text-[#DC2626] transition-colors duration-200">
-                    {service.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-sm text-slate-600 leading-relaxed line-clamp-4 mb-4">
-                    {service.description}
-                  </p>
-                </div>
-
-                {/* "Ver Más" link in red with animated arrow */}
-                <div className="text-sm font-bold text-[#DC2626] group-hover:text-red-700 transition-colors inline-flex items-center gap-1.5 mt-2">
-                  <span>Ver Más</span>
-                  <ChevronRight size={16} className="transition-transform duration-300 group-hover:translate-x-1" />
-                </div>
+                )}
               </div>
-            );
-          })}
+
+              {/* Right Column: Service Content with internal padding */}
+              <div className="lg:col-span-6 xl:col-span-6 p-6 sm:p-10 lg:p-12 xl:p-14 flex flex-col justify-center text-left">
+                {/* Title */}
+                <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight leading-tight">
+                  {service.title}
+                </h3>
+
+                {/* Description */}
+                <p className="text-slate-600 text-base sm:text-lg lg:text-lg leading-relaxed mb-8 font-normal">
+                  {service.description}
+                </p>
+
+                {/* Bullet Points List */}
+                <ul className="space-y-3.5 sm:space-y-4 text-slate-700 text-base sm:text-lg">
+                  {service.includes.map((item, i) => (
+                    <li key={i} className="flex items-center gap-3.5">
+                      <span className="h-2.5 w-2.5 rounded-full bg-[#DC2626] shrink-0" />
+                      <span className="font-medium text-slate-800">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-
-      {/* Detail Modal with entrance and exit animations */}
-      {selectedService && (
-        <div 
-          className={`fixed inset-0 z-[60] bg-gradient-to-br from-[#0D1B2A]/75 via-slate-900/60 to-[#DC2626]/20 backdrop-blur-xs flex items-center justify-center p-4 ${
-            isClosing ? 'animate-modal-backdrop-out' : 'animate-modal-backdrop-in'
-          }`}
-          onClick={handleCloseService}
-        >
-          <div 
-            className={`relative overflow-hidden bg-white rounded-2xl max-w-lg w-full p-6 sm:p-8 shadow-[0_24px_70px_-20px_rgba(13,27,42,0.55)] border border-[#0D1B2A]/15 ring-1 ring-white/40 ${
-              isClosing ? 'animate-modal-card-out' : 'animate-modal-card-in'
-            }`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="absolute inset-x-8 top-0 h-1 rounded-b-full bg-gradient-to-r from-[#0D1B2A] via-[#DC2626] to-[#0D1B2A]" />
-            <div className="absolute -right-12 -top-12 h-36 w-36 rounded-full border border-[#0D1B2A]/10" />
-            <div className="absolute -right-5 top-5 h-16 w-16 rounded-full border border-[#DC2626]/10" />
-            <div className="absolute -left-20 bottom-8 h-32 w-32 rounded-full bg-[#0D1B2A]/[0.025] blur-2xl" />
-
-            <div className="flex items-center gap-3.5 mb-5">
-              <div className="relative w-12 h-12 rounded-full bg-gradient-to-br from-[#DC2626] to-[#B91C1C] text-white flex items-center justify-center shrink-0 shadow-md ring-4 ring-[#0D1B2A]/[0.06]">
-                {React.createElement(getServiceIcon(selectedService.iconName), { size: 24 })}
-              </div>
-              <div>
-                <h3 className="text-xl font-bold text-slate-900">
-                  {selectedService.title}
-                </h3>
-                <span className="inline-flex items-center rounded-full bg-[#0D1B2A]/[0.06] px-2.5 py-1 text-xs font-bold text-[#0D1B2A]">
-                  {selectedService.badge}
-                </span>
-              </div>
-            </div>
-
-            <p className="text-sm sm:text-base text-slate-600 mb-5 leading-relaxed">
-              {selectedService.description}
-            </p>
-
-            <div className="bg-slate-50 p-3.5 sm:p-4 rounded-lg sm:rounded-xl border border-slate-100 mb-4 sm:mb-5">
-              <h4 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-slate-800 mb-3">
-                <span className="h-4 w-1 rounded-full bg-[#DC2626]" />
-                Incluye:
-              </h4>
-              <ul className="space-y-2 text-sm text-slate-700">
-                {selectedService.includes.map((item, i) => (
-                  <li key={i} className="flex items-center gap-2.5">
-                    <CheckCircle2 size={16} className="text-[#DC2626] shrink-0" />
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="flex justify-end">
-              <button
-                type="button"
-                onClick={handleCloseService}
-                className="px-5 py-2.5 rounded-lg bg-[#0D1B2A]/[0.06] text-[#0D1B2A] text-sm font-bold hover:bg-[#0D1B2A]/[0.1] border border-[#0D1B2A]/10 transition-colors cursor-pointer"
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 };

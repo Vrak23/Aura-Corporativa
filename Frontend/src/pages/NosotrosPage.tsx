@@ -1,5 +1,5 @@
 import logoAura from '../assets/logo_aura.jpg';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { 
   Video, 
   Share2, 
@@ -13,6 +13,10 @@ import {
 import { siteConfig } from '../config/siteConfig';
 
 export const NosotrosPage: React.FC = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <main className="grow bg-[#FAFBFD] font-sans overflow-x-hidden selection:bg-red-500 selection:text-white">
       {/* =========================================================================

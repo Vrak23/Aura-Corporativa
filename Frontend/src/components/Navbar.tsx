@@ -48,6 +48,11 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
     };
   }, [isOpen]);
 
+  const handleNosotrosClick = () => {
+    handleToggle(false);
+    window.scrollTo(0, 0);
+  };
+
   const handleAnchorClick = (href: string) => {
     handleToggle(false);
     if (isNosotros) {
@@ -91,13 +96,6 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
             Servicios
           </button>
 
-          <Link
-            to="/nosotros"
-            className={isNosotros ? 'text-[#DC2626] font-semibold border-b-2 border-[#DC2626] pb-0.5' : 'hover:text-[#DC2626] transition-colors'}
-          >
-            Nosotros
-          </Link>
-
           <button
             type="button"
             onClick={() => handleAnchorClick('#por-que-aura')}
@@ -113,6 +111,14 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
           >
             FAQ
           </button>
+
+          <Link
+            to="/nosotros"
+            onClick={handleNosotrosClick}
+            className={isNosotros ? 'text-[#DC2626] font-semibold border-b-2 border-[#DC2626] pb-0.5' : 'hover:text-[#DC2626] transition-colors'}
+          >
+            Nosotros
+          </Link>
         </nav>
 
         {/* Right Desktop CTA + Mobile Hamburger Button */}
@@ -167,15 +173,6 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
                 <ArrowRight size={18} className="opacity-40" />
               </button>
 
-              <Link
-                to="/nosotros"
-                onClick={() => handleToggle(false)}
-                className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center justify-between transition-colors ' + (isNosotros ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
-              >
-                <span>Nosotros</span>
-                <ArrowRight size={18} className="opacity-40" />
-              </Link>
-
               <button
                 type="button"
                 onClick={() => handleAnchorClick('#por-que-aura')}
@@ -193,6 +190,15 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
                 <span>FAQ</span>
                 <ArrowRight size={18} className="opacity-40" />
               </button>
+
+              <Link
+                to="/nosotros"
+                onClick={handleNosotrosClick}
+                className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center justify-between transition-colors ' + (isNosotros ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
+              >
+                <span>Nosotros</span>
+                <ArrowRight size={18} className="opacity-40" />
+              </Link>
             </nav>
 
             <div className="pt-4 border-t border-slate-100 space-y-3">
