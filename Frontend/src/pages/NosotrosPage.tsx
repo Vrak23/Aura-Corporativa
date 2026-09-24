@@ -14,12 +14,22 @@ import { siteConfig } from '../config/siteConfig';
 export const NosotrosPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const isIntersectingRef = useRef(false);
+  const isReadyRef = useRef(false);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(0.3);
   const [isVolumeOpen, setIsVolumeOpen] = useState(false);
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    document.documentElement.scrollTop = 0;
+    document.body.scrollTop = 0;
+
+    // Small delay to ensure scroll position has completed resetting to top before activating observer
+    const timer = setTimeout(() => {
+      isReadyRef.current = true;
+    }, 200);
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Guarantee audio is set and video plays ONLY when scrolled into view
@@ -36,8 +46,8 @@ export const NosotrosPage: React.FC = () => {
         video.muted = false;
         video.volume = 0.3;
         setIsMuted(false);
-        // Only trigger play IF the video is currently in the viewport
-        if (isIntersectingRef.current && video.paused && !video.ended) {
+        // Only trigger play IF the page is ready and video is currently in the viewport
+        if (isReadyRef.current && isIntersectingRef.current && video.paused && !video.ended) {
           video.play().catch(() => {});
         }
       }
@@ -51,15 +61,18 @@ export const NosotrosPage: React.FC = () => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             isIntersectingRef.current = true;
-            video.volume = 0.3;
-            const playPromise = video.play();
-            if (playPromise !== undefined) {
-              playPromise.catch(() => {
-                // If browser strictly blocks unmuted autoplay without prior gesture, start muted
-                video.muted = true;
-                setIsMuted(true);
-                video.play().catch(() => {});
-              });
+            // Only play if the page transition is complete and the user reached the video
+            if (isReadyRef.current) {
+              video.volume = 0.3;
+              const playPromise = video.play();
+              if (playPromise !== undefined) {
+                playPromise.catch(() => {
+                  // If browser strictly blocks unmuted autoplay without prior gesture, start muted
+                  video.muted = true;
+                  setIsMuted(true);
+                  video.play().catch(() => {});
+                });
+              }
             }
           } else {
             isIntersectingRef.current = false;

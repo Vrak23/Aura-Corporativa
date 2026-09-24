@@ -60,6 +60,9 @@ export const AboutSection: React.FC = () => {
 
             <Link
               to="/nosotros"
+              onClick={() => {
+                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+              }}
               className="inline-flex items-center text-sm font-bold text-[#DC2626] hover:text-red-700 transition-colors"
             >
               Conocer más sobre Aura Corporativa

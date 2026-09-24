@@ -310,6 +310,9 @@ export const ContactInfoSection: React.FC<ContactInfoProps> = ({ onOpenPrivacy }
         <div className="mt-12 sm:mt-16 text-center flex justify-center">
           <Link
             to="/nosotros"
+            onClick={() => {
+              window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            }}
             className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#0B192C] hover:bg-[#142842] active:scale-95 text-white font-bold text-base sm:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer border border-[#0B192C]"
           >
             <span>Conoce más de nosotros</span>
