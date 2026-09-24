@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Phone, Mail, MapPin, User, LoaderCircle, Check } from 'lucide-react';
+import logoAuraMini from '../assets/logo_aura_mini.jpg';
 import { siteConfig } from '../config/siteConfig';
 import { contactoService } from '../services/contactoService';
 import type { LeadPayload } from '../types';
@@ -302,6 +304,21 @@ export const ContactInfoSection: React.FC<ContactInfoProps> = ({ onOpenPrivacy }
               </div>
             </div>
           </div>
+        </div>
+
+        {/* Call to action button leading to /nosotros */}
+        <div className="mt-12 sm:mt-16 text-center flex justify-center">
+          <Link
+            to="/nosotros"
+            className="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 bg-[#0B192C] hover:bg-[#142842] active:scale-95 text-white font-bold text-base sm:text-lg rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 group cursor-pointer border border-[#0B192C]"
+          >
+            <span>Conoce más de nosotros</span>
+            <img 
+              src={logoAuraMini} 
+              alt="Aura Corporativa" 
+              className="h-6 w-auto object-contain rounded-xs transition-transform duration-300 group-hover:scale-110" 
+            />
+          </Link>
         </div>
       </div>
     </section>

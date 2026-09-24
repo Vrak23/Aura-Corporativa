@@ -1,21 +1,107 @@
 import logoAura from '../assets/logo_aura.jpg';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { 
-  Video, 
   Share2, 
-  ShieldCheck,
+  ShieldCheck, 
   Users, 
   ArrowRight, 
   CheckCircle2, 
-  Play,
-  TrendingUp
+  TrendingUp,
+  Volume2,
+  VolumeX
 } from 'lucide-react';
 import { siteConfig } from '../config/siteConfig';
 
 export const NosotrosPage: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [isMuted, setIsMuted] = useState(false);
+  const [volume, setVolume] = useState(0.3);
+  const [isVolumeOpen, setIsVolumeOpen] = useState(false);
+
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  // Guarantee audio is active and volume is set on mount and user interaction
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    video.volume = 0.3;
+    video.muted = false;
+
+    const unlockAudio = () => {
+      if (video) {
+        video.muted = false;
+        video.volume = 0.3;
+        setIsMuted(false);
+        if (video.paused && !video.ended) {
+          video.play().catch(() => {});
+        }
+      }
+    };
+
+    window.addEventListener('click', unlockAudio, { once: true });
+    window.addEventListener('touchstart', unlockAudio, { once: true });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            video.muted = false;
+            video.volume = 0.3;
+            const playPromise = video.play();
+            if (playPromise !== undefined) {
+              playPromise.catch(() => {
+                // If browser strictly requires first gesture, start playing and unlock audio on first touch/click
+                video.muted = true;
+                setIsMuted(true);
+                video.play().catch(() => {});
+              });
+            }
+          } else {
+            video.pause();
+          }
+        });
+      },
+      {
+        threshold: 0.35,
+      }
+    );
+
+    observer.observe(video);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('click', unlockAudio);
+      window.removeEventListener('touchstart', unlockAudio);
+    };
+  }, []);
+
+  const toggleMute = () => {
+    if (!videoRef.current) return;
+    const nextMuted = !isMuted;
+    videoRef.current.muted = nextMuted;
+    setIsMuted(nextMuted);
+    if (!nextMuted && (videoRef.current.volume === 0 || volume === 0)) {
+      videoRef.current.volume = 0.3;
+      setVolume(0.3);
+    }
+  };
+
+  const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!videoRef.current) return;
+    const newVol = parseFloat(e.target.value);
+    videoRef.current.volume = newVol;
+    setVolume(newVol);
+    if (newVol === 0) {
+      videoRef.current.muted = true;
+      setIsMuted(true);
+    } else if (isMuted) {
+      videoRef.current.muted = false;
+      setIsMuted(false);
+    }
+  };
 
   return (
     <main className="grow bg-[#FAFBFD] font-sans overflow-x-hidden selection:bg-red-500 selection:text-white">
@@ -148,49 +234,79 @@ export const NosotrosPage: React.FC = () => {
       </section>
 
       {/* =========================================================================
-          3. SECCIÓN DE VIDEO CORPORATIVO (PREMIUM CONTAINER)
+          3. SECCIÓN DE VIDEO CORPORATIVO (AUTO-PLAY ON SCROLL)
          ========================================================================= */}
-      <section className="py-16 sm:py-20 bg-[#0B192C] text-white relative overflow-hidden">
+      <section className="py-16 sm:py-24 bg-[#0B192C] text-white relative overflow-hidden">
         {/* Glow azul marino y acentos */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-red-600/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="text-center mb-8 sm:mb-12">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 text-red-400 text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4">
-              <Video size={14} />
-              <span>Experiencia Audiovisual</span>
-            </div>
             <h2 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
               Aura Corporativa en <span className="text-[#DC2626]">Movimiento</span>
             </h2>
             <p className="text-slate-400 text-xs sm:text-base mt-2 max-w-xl mx-auto">
-              Conoce nuestras instalaciones, testimonios de clientes y metodología de trabajo en terreno.
+              Conoce nuestra cultura, propuesta de valor y metodología de trabajo en terreno.
             </p>
           </div>
 
-          {/* Video Container Frame Responsive */}
-          <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 border border-slate-800/80 shadow-2xl min-h-[260px] sm:aspect-video max-w-4xl mx-auto flex flex-col items-center justify-center p-6 sm:p-10 text-center group cursor-pointer">
-            {/* Background Grid Texture */}
-            <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none" />
+          {/* Video Container Frame Responsive with only Volume Control */}
+          <div className="max-w-4xl mx-auto w-full flex justify-center">
+            <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-950 border border-slate-700/60 shadow-[0_20px_50px_rgba(0,0,0,0.5)] w-full group">
+              <video
+                ref={videoRef}
+                src="/aura_intro.mp4"
+                muted={isMuted}
+                playsInline
+                loop
+                preload="auto"
+                className="w-full h-auto max-h-[80vh] object-contain rounded-2xl sm:rounded-3xl block"
+              >
+                <source src="/aura_intro.mp4" type="video/mp4" />
+                <source src="/aura%20intro.mp4" type="video/mp4" />
+                Tu navegador no soporta la reproducción de video HTML5.
+              </video>
 
-            {/* Play Button Icon */}
-            <div className="relative z-10 w-16 h-16 sm:w-20 md:w-24 sm:h-20 md:h-24 rounded-full bg-[#DC2626] hover:bg-red-700 text-white flex items-center justify-center mb-4 sm:mb-6 shadow-2xl shadow-red-600/40 group-hover:scale-110 group-active:scale-95 transition-all duration-300">
-              <Play size={28} className="ml-1 sm:hidden fill-white" />
-              <Play size={36} className="ml-1 hidden sm:block fill-white" />
-            </div>
+              {/* Compact Floating Volume Control that expands on interaction */}
+              <div 
+                className={`absolute bottom-3 right-3 sm:bottom-4 sm:right-4 z-20 flex items-center bg-slate-900/85 hover:bg-slate-900/95 backdrop-blur-md rounded-full border border-white/15 shadow-lg text-white transition-all duration-300 ease-out ${
+                  isVolumeOpen ? 'w-36 sm:w-40 px-2.5 py-1.5 gap-2' : 'w-8 h-8 sm:w-9 sm:h-9 p-0 justify-center'
+                }`}
+                onMouseEnter={() => setIsVolumeOpen(true)}
+                onMouseLeave={() => setIsVolumeOpen(false)}
+              >
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (!isVolumeOpen) {
+                      setIsVolumeOpen(true);
+                    } else {
+                      toggleMute();
+                    }
+                  }}
+                  className="text-white hover:text-[#DC2626] transition-colors shrink-0 p-1 cursor-pointer flex items-center justify-center focus:outline-hidden"
+                  aria-label={isMuted ? 'Activar sonido' : 'Silenciar'}
+                  title={isMuted ? 'Activar sonido' : 'Silenciar'}
+                >
+                  {isMuted || volume === 0 ? <VolumeX size={16} /> : <Volume2 size={16} />}
+                </button>
 
-            <h3 className="relative z-10 text-lg sm:text-2xl font-bold text-white mb-2">
-              Espacio para Video Institucional Oficial
-            </h3>
-            <p className="relative z-10 text-xs sm:text-sm text-slate-400 max-w-lg leading-relaxed px-2">
-              Listo para integrar la presentación oficial en video (YouTube, Vimeo o archivo MP4 directo) en cuanto sea suministrado.
-            </p>
-
-            {/* Bottom Status Tag */}
-            <div className="mt-4 sm:mt-0 sm:absolute sm:bottom-4 sm:right-4 z-10 flex items-center gap-2 px-3 py-1.5 rounded-full bg-slate-900/90 border border-slate-700 text-[11px] text-slate-300 font-medium">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span>Contenedor listo para inserción</span>
+                {/* Slider shown only when expanded */}
+                <div className={`overflow-hidden transition-all duration-300 flex items-center ${isVolumeOpen ? 'w-full opacity-100' : 'w-0 opacity-0 pointer-events-none'}`}>
+                  <input
+                    type="range"
+                    min="0"
+                    max="1"
+                    step="0.05"
+                    value={isMuted ? 0 : volume}
+                    onChange={handleVolumeChange}
+                    className="w-full h-1 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-[#DC2626]"
+                    aria-label="Control de volumen"
+                    title={`Volumen: ${Math.round((isMuted ? 0 : volume) * 100)}%`}
+                  />
+                </div>
+              </div>
             </div>
           </div>
         </div>
