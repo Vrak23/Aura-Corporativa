@@ -4,7 +4,6 @@ import {
   Share2, 
   ShieldCheck, 
   Users, 
-  ArrowRight, 
   CheckCircle2, 
   TrendingUp,
   Volume2,
@@ -14,6 +13,7 @@ import { siteConfig } from '../config/siteConfig';
 
 export const NosotrosPage: React.FC = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isIntersectingRef = useRef(false);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(0.3);
   const [isVolumeOpen, setIsVolumeOpen] = useState(false);
@@ -22,50 +22,53 @@ export const NosotrosPage: React.FC = () => {
     window.scrollTo(0, 0);
   }, []);
 
-  // Guarantee audio is active and volume is set on mount and user interaction
+  // Guarantee audio is set and video plays ONLY when scrolled into view
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
     video.volume = 0.3;
     video.muted = false;
+    video.pause();
 
     const unlockAudio = () => {
       if (video) {
         video.muted = false;
         video.volume = 0.3;
         setIsMuted(false);
-        if (video.paused && !video.ended) {
+        // Only trigger play IF the video is currently in the viewport
+        if (isIntersectingRef.current && video.paused && !video.ended) {
           video.play().catch(() => {});
         }
       }
     };
 
-    window.addEventListener('click', unlockAudio, { once: true });
-    window.addEventListener('touchstart', unlockAudio, { once: true });
+    window.addEventListener('click', unlockAudio);
+    window.addEventListener('touchstart', unlockAudio);
 
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            video.muted = false;
+            isIntersectingRef.current = true;
             video.volume = 0.3;
             const playPromise = video.play();
             if (playPromise !== undefined) {
               playPromise.catch(() => {
-                // If browser strictly requires first gesture, start playing and unlock audio on first touch/click
+                // If browser strictly blocks unmuted autoplay without prior gesture, start muted
                 video.muted = true;
                 setIsMuted(true);
                 video.play().catch(() => {});
               });
             }
           } else {
+            isIntersectingRef.current = false;
             video.pause();
           }
         });
       },
       {
-        threshold: 0.35,
+        threshold: 0.25,
       }
     );
 
@@ -346,9 +349,8 @@ export const NosotrosPage: React.FC = () => {
                 <h3 className="font-bold text-slate-900 text-lg group-hover:text-[#1877f2] transition-colors">Facebook</h3>
                 <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">Convocatorias masivas, eventos y comunidad</p>
               </div>
-              <div className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-[#1877f2] group-hover:translate-x-1 transition-transform">
+              <div className="mt-6 inline-flex items-center text-xs font-bold text-[#1877f2]">
                 <span>Ir a Facebook</span>
-                <ArrowRight size={14} />
               </div>
             </a>
 
@@ -368,9 +370,8 @@ export const NosotrosPage: React.FC = () => {
                 <h3 className="font-bold text-slate-900 text-lg group-hover:text-[#e4405f] transition-colors">Instagram</h3>
                 <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">Cultura interna, reconocimientos y día a día en Aura</p>
               </div>
-              <div className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-[#e4405f] group-hover:translate-x-1 transition-transform">
+              <div className="mt-6 inline-flex items-center text-xs font-bold text-[#e4405f]">
                 <span>Ver fotos & reels</span>
-                <ArrowRight size={14} />
               </div>
             </a>
 
@@ -390,9 +391,8 @@ export const NosotrosPage: React.FC = () => {
                 <h3 className="font-bold text-slate-900 text-lg group-hover:text-black transition-colors">TikTok</h3>
                 <p className="text-xs text-slate-500 mt-1.5 leading-relaxed">Videos cortos, dinámicas de equipo y tips laborales</p>
               </div>
-              <div className="mt-6 inline-flex items-center gap-1.5 text-xs font-bold text-slate-900 group-hover:translate-x-1 transition-transform">
+              <div className="mt-6 inline-flex items-center text-xs font-bold text-slate-900">
                 <span>Ver videos</span>
-                <ArrowRight size={14} />
               </div>
             </a>
           </div>
@@ -412,10 +412,9 @@ export const NosotrosPage: React.FC = () => {
           </p>
           <a
             href="/#contacto"
-            className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-[#DC2626] hover:bg-red-700 active:scale-95 text-white font-bold text-base rounded-xl shadow-lg shadow-red-600/30 transition-all cursor-pointer"
+            className="inline-flex items-center justify-center px-8 py-4 bg-[#DC2626] hover:bg-red-700 active:scale-95 text-white font-bold text-base rounded-xl shadow-lg shadow-red-600/30 transition-all cursor-pointer"
           >
             <span>Solicitar Cotización Corporativa</span>
-            <ArrowRight size={18} />
           </a>
         </div>
       </section>

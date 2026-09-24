@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Menu, X, Phone, ArrowRight } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import logoAura from '../assets/logo_aura.jpg';
 import { siteConfig } from '../config/siteConfig';
 
@@ -158,46 +158,41 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
               <Link
                 to="/"
                 onClick={handleHomeClick}
-                className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center justify-between transition-colors cursor-pointer ' + (!isNosotros ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
+                className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center transition-colors cursor-pointer ' + (!isNosotros ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
               >
                 <span>Inicio</span>
-                <ArrowRight size={18} className="opacity-40" />
               </Link>
 
               <button
                 type="button"
                 onClick={() => handleAnchorClick('#servicios')}
-                className="text-lg font-semibold py-2 px-3 rounded-lg flex items-center justify-between text-slate-800 hover:bg-slate-50 transition-colors text-left"
+                className="text-lg font-semibold py-2 px-3 rounded-lg flex items-center text-slate-800 hover:bg-slate-50 transition-colors text-left cursor-pointer"
               >
                 <span>Servicios</span>
-                <ArrowRight size={18} className="opacity-40" />
               </button>
 
               <button
                 type="button"
                 onClick={() => handleAnchorClick('#por-que-aura')}
-                className="text-lg font-semibold py-2 px-3 rounded-lg flex items-center justify-between text-slate-800 hover:bg-slate-50 transition-colors text-left"
+                className="text-lg font-semibold py-2 px-3 rounded-lg flex items-center text-slate-800 hover:bg-slate-50 transition-colors text-left cursor-pointer"
               >
                 <span>¿Por qué Aura?</span>
-                <ArrowRight size={18} className="opacity-40" />
               </button>
 
               <button
                 type="button"
                 onClick={() => handleAnchorClick('#faq')}
-                className="text-lg font-semibold py-2 px-3 rounded-lg flex items-center justify-between text-slate-800 hover:bg-slate-50 transition-colors text-left"
+                className="text-lg font-semibold py-2 px-3 rounded-lg flex items-center text-slate-800 hover:bg-slate-50 transition-colors text-left cursor-pointer"
               >
                 <span>FAQ</span>
-                <ArrowRight size={18} className="opacity-40" />
               </button>
 
               <Link
                 to="/nosotros"
                 onClick={handleNosotrosClick}
-                className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center justify-between transition-colors ' + (isNosotros ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
+                className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center transition-colors ' + (isNosotros ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
               >
                 <span>Nosotros</span>
-                <ArrowRight size={18} className="opacity-40" />
               </Link>
             </nav>
 
@@ -205,10 +200,9 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
               <button
                 type="button"
                 onClick={() => handleAnchorClick('#contacto')}
-                className="w-full py-3.5 px-4 bg-[#DC2626] hover:bg-red-700 text-white font-bold text-base rounded-lg transition-colors text-center shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+                className="w-full py-3.5 px-4 bg-[#DC2626] hover:bg-red-700 text-white font-bold text-base rounded-lg transition-colors text-center shadow-xs flex items-center justify-center cursor-pointer"
               >
-                <span>Solicitar Contacto</span>
-                <ArrowRight size={18} />
+                Solicitar Contacto
               </button>
 
               <a

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Target, Eye, ShieldCheck, ArrowRight } from 'lucide-react';
+import { Target, Eye, ShieldCheck } from 'lucide-react';
 import aboutImage from '../assets/about_handshake.jpg';
 
 export const AboutSection: React.FC = () => {
@@ -60,10 +60,9 @@ export const AboutSection: React.FC = () => {
 
             <Link
               to="/nosotros"
-              className="inline-flex items-center gap-2 text-sm font-bold text-[#DC2626] hover:text-red-700 transition-colors group"
+              className="inline-flex items-center text-sm font-bold text-[#DC2626] hover:text-red-700 transition-colors"
             >
-              <span>Conocer más sobre Aura Corporativa</span>
-              <ArrowRight size={16} className="transition-transform group-hover:translate-x-1" />
+              Conocer más sobre Aura Corporativa
             </Link>
           </div>
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { DollarSign, ShieldCheck, Target, Clock, CheckCircle2, ArrowRight } from 'lucide-react';
+import { DollarSign, ShieldCheck, Target, Clock, CheckCircle2 } from 'lucide-react';
 
 export const WhyAuraSection: React.FC = () => {
   const metrics = [
@@ -128,10 +128,9 @@ export const WhyAuraSection: React.FC = () => {
           </div>
           <a
             href="#contacto"
-            className="shrink-0 inline-flex items-center gap-2 px-6 py-3.5 bg-[#DC2626] hover:bg-red-700 text-white font-bold text-sm rounded-xl shadow-md transition-all active:scale-95"
+            className="shrink-0 inline-flex items-center justify-center px-6 py-3.5 bg-[#DC2626] hover:bg-red-700 text-white font-bold text-sm rounded-xl shadow-md transition-all active:scale-95"
           >
-            <span>Solicitar Asesoría</span>
-            <ArrowRight size={16} />
+            Solicitar Asesoría
           </a>
         </div>
       </div>
