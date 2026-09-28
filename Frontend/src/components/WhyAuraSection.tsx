@@ -1,123 +1,103 @@
 import React from 'react';
-import { DollarSign, ShieldCheck, Target, Clock, CheckCircle2 } from 'lucide-react';
+import { DollarSign, ShieldCheck, Target, Clock } from 'lucide-react';
+import whyAuraBg from '../assets/por_que_aura.jpg';
 
 export const WhyAuraSection: React.FC = () => {
   const metrics = [
-    { value: '100%', label: 'Cumplimiento Normativo', sub: 'Sunafil & Sunat' },
-    { value: '+98%', label: 'Satisfacción', sub: 'En servicios contratados' },
-    { value: '24-48h', label: 'Respuesta Operativa', sub: 'Atención ágil a solicitudes' },
-    { value: '0%', label: 'Contingencias Laborales', sub: 'Tranquilidad garantizada' },
+    { value: '100%', label: 'Cumplimiento Legal', sub: 'Sunafil & Sunat' },
+    { value: '+98%', label: 'Satisfacción', sub: 'En servicios B2B' },
+    { value: '24-48h', label: 'Respuesta Operativa', sub: 'Atención continua' },
+    { value: '0%', label: 'Contingencias', sub: 'Blindaje integral' },
   ];
 
-  const points = [
+  const pillars = [
     {
       icon: DollarSign,
-      title: 'Ahorro Operativo',
-      desc: 'Optimización de recursos y reducción inmediata de costos fijos de contratación e infraestructura.',
-      bullets: [
-        'Disminución de costos fijos de nómina',
-        'Presupuestos claros y sin sobrecostos',
-      ],
+      title: 'Ahorro Operativo y Eficiencia',
+      desc: 'Optimizamos tus recursos y reducimos costos fijos de nómina, contratación e infraestructura con presupuestos claros y transparentes.',
     },
     {
       icon: ShieldCheck,
-      title: 'Respaldo Legal & Tributario',
-      desc: 'Supervisión rigurosa de contratos, aportes de ley y planillas con total blindaje jurídico.',
-      bullets: [
-        'Cero contingencias ante Sunafil y Sunat',
-        'Contratos y legajos 100% auditables',
-      ],
+      title: 'Respaldo Legal y Blindaje Tributario',
+      desc: 'Supervisión rigurosa de contratos laborales y aportes de ley, asegurando cero contingencias y total tranquilidad ante Sunafil y Sunat.',
     },
     {
       icon: Target,
-      title: 'Enfoque Estratégico',
-      desc: 'Libera la carga operativa de tu directiva para que se enfoque 100% en hacer crecer el negocio.',
-      bullets: [
-        'Delegación segura de procesos operativos',
-        'Mayor productividad de tus líderes',
-      ],
+      title: 'Enfoque Estratégico del Negocio',
+      desc: 'Liberamos la carga operativa del personal para que tu equipo directivo se concentre al 100% en la rentabilidad y el crecimiento comercial.',
     },
     {
       icon: Clock,
-      title: 'Atención Ágil & Continua',
-      desc: 'Ejecutivos asignados con monitoreo constante para resolver incidencias en tiempo récord.',
-      bullets: [
-        'Canal directo de comunicación',
-        'Reemplazos y coberturas oportunas',
-      ],
+      title: 'Atención Ágil y Cobertura Continua',
+      desc: 'Ejecutivos de cuenta asignados con monitoreo permanente y resolución inmediata de incidencias para que tus operaciones nunca se detengan.',
     },
   ];
 
   return (
-    <section id="por-que-aura" className="relative overflow-hidden py-24 bg-slate-50/70">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="por-que-aura" className="relative overflow-hidden py-24 text-white">
+      {/* Background Image with Dark Professional Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img
+          src={whyAuraBg}
+          alt="Por qué elegir Aura Corporativa"
+          className="w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#081526]/90 via-[#0B192C]/95 to-[#081526]/95" />
+      </div>
+
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
-        <div className="relative text-center mb-16">
-          <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[#0D1B2A]" />
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">
+        <div className="text-center mb-14">
+          <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[#DC2626]" />
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
             ¿Por qué elegir <span className="text-[#DC2626]">Aura Corporativa</span>?
           </h2>
-          <p className="mt-3 text-base sm:text-lg text-slate-600 max-w-2xl mx-auto">
-            Ventajas estratégicas comprobadas que protegen tu operación y multiplican la rentabilidad de tu organización.
+          <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+            Ventajas estratégicas comprobadas que protegen tu operación y potencian la productividad de tu organización.
           </p>
         </div>
 
-        {/* 1. Metrics & Proof Bar */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-12">
+        {/* 1. Concise Metrics Strip */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-16 pb-10 border-b border-white/10">
           {metrics.map((m, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-2xl p-5 sm:p-6 shadow-xs border border-slate-100 text-center flex flex-col items-center justify-center hover:shadow-md transition-shadow"
-            >
-              <span className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-[#DC2626] tracking-tight">
+            <div key={index} className="text-center">
+              <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#DC2626] tracking-tight">
                 {m.value}
-              </span>
-              <span className="text-sm font-bold text-slate-900 mt-1">
+              </div>
+              <div className="text-sm sm:text-base font-bold text-white mt-1">
                 {m.label}
-              </span>
-              <span className="text-xs text-slate-500 mt-0.5">
+              </div>
+              <div className="text-xs text-slate-400 mt-0.5">
                 {m.sub}
-              </span>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* 2. Detailed 4 Value Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
-          {points.map((item, index) => {
+        {/* 2. Structured Information in Paragraphs (No Cards) */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-16">
+          {pillars.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div
-                key={index}
-                className="bg-white rounded-2xl p-6 sm:p-7 shadow-xs border border-slate-100 hover:shadow-lg transition-all flex flex-col justify-between group"
-              >
+              <div key={index} className="flex items-start gap-4 sm:gap-5 text-left">
+                <div className="w-12 h-12 rounded-xl bg-[#DC2626]/20 border border-[#DC2626]/40 text-[#DC2626] flex items-center justify-center shrink-0 mt-1">
+                  <Icon size={24} />
+                </div>
                 <div>
-                  <div className="w-12 h-12 rounded-xl bg-red-50 text-[#DC2626] flex items-center justify-center mb-5 border border-red-100 group-hover:scale-105 transition-transform">
-                    <Icon size={24} />
-                  </div>
-                  <h3 className="text-lg font-bold text-slate-900 mb-2.5">
-                    {item.title}
+                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 flex items-center gap-2">
+                    <span>{item.title}</span>
                   </h3>
-                  <p className="text-sm text-slate-600 leading-relaxed mb-5">
+                  <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
                     {item.desc}
                   </p>
-                </div>
-
-                <div className="pt-4 border-t border-slate-100 space-y-2">
-                  {item.bullets.map((b, bi) => (
-                    <div key={bi} className="flex items-start gap-2 text-xs text-slate-600">
-                      <CheckCircle2 size={14} className="text-[#DC2626] shrink-0 mt-0.5" />
-                      <span>{b}</span>
-                    </div>
-                  ))}
                 </div>
               </div>
             );
           })}
         </div>
 
-        {/* 3. Bottom Assurance Callout */}
-        <div className="bg-[#0B192C] text-white rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-xl">
+        {/* 3. Bottom Assurance Callout (Untouched) */}
+        <div className="bg-[#0B192C]/90 text-white rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl border border-white/10 backdrop-blur-md">
           <div className="max-w-2xl text-center md:text-left">
             <h4 className="text-xl sm:text-2xl font-bold mb-2">
               Transformamos la gestión de talento en una ventaja competitiva
@@ -137,4 +117,6 @@ export const WhyAuraSection: React.FC = () => {
     </section>
   );
 };
+
+export default WhyAuraSection;
 
