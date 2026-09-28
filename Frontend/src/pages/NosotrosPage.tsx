@@ -268,8 +268,8 @@ export const NosotrosPage: React.FC = () => {
           </p>
         </div>
 
-        {/* Contenedor Horizontal Expandible de Pilares */}
-        <div className="flex flex-col lg:flex-row gap-3.5 sm:gap-4 lg:gap-5 min-h-0 lg:min-h-[440px] items-stretch">
+        {/* Contenedor de Pilares: En móvil tarjetas 100% desplegadas; en desktop acordeón horizontal interactivo */}
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-5 lg:gap-5 min-h-0 lg:min-h-[440px] items-stretch">
           {pillarsData.map((pilar, index) => {
             const Icon = pilar.icon;
             const isActive = activePillar === index;
@@ -279,16 +279,18 @@ export const NosotrosPage: React.FC = () => {
                 key={index}
                 onMouseEnter={() => setActivePillar(index)}
                 onClick={() => setActivePillar(index)}
-                className={`relative overflow-hidden cursor-pointer transition-all duration-500 ease-out border-2 flex flex-col justify-between select-none ${
+                className={`relative overflow-hidden cursor-default lg:cursor-pointer transition-all duration-500 ease-out border flex flex-col justify-between select-none p-5 sm:p-6 lg:p-8 rounded-2xl lg:rounded-3xl shadow-xs ${
                   isActive
-                    ? 'lg:flex-[2.6] bg-gradient-to-br from-[#0B192C] via-[#0E2238] to-[#162D45] text-white border-[#DC2626] shadow-xl p-5 sm:p-7 lg:p-8 rounded-2xl sm:rounded-3xl'
-                    : 'lg:flex-1 bg-white hover:bg-slate-50 text-slate-800 border-slate-200 hover:border-slate-300 shadow-xs p-4 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl lg:rounded-3xl'
+                    ? 'bg-white text-slate-800 border-slate-200/90 lg:flex-[2.6] lg:bg-gradient-to-br lg:from-[#0B192C] lg:via-[#0E2238] lg:to-[#162D45] lg:text-white lg:border-[#DC2626] lg:shadow-xl'
+                    : 'bg-white hover:bg-slate-50/80 text-slate-800 border-slate-200/90 lg:flex-1 lg:hover:border-slate-300'
                 }`}
               >
                 {/* Número Grande en Marca de Agua */}
                 <div
-                  className={`absolute right-4 -top-2 text-5xl sm:text-7xl lg:text-8xl font-black pointer-events-none transition-opacity duration-500 ${
-                    isActive ? 'text-white/5 opacity-100' : 'text-slate-200/60 opacity-60'
+                  className={`absolute right-4 -top-2 text-5xl sm:text-6xl lg:text-8xl font-black pointer-events-none transition-opacity duration-500 ${
+                    isActive
+                      ? 'text-slate-200/70 lg:text-white/5 opacity-70 lg:opacity-100'
+                      : 'text-slate-200/70 opacity-70'
                   }`}
                 >
                   {pilar.number}
@@ -296,11 +298,11 @@ export const NosotrosPage: React.FC = () => {
 
                 {/* Top Header del Pilar */}
                 <div>
-                  <div className="flex items-center justify-between mb-4 sm:mb-6">
+                  <div className="flex items-center justify-between mb-4 sm:mb-5 lg:mb-6">
                     <div
-                      className={`w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs ${
+                      className={`w-11 h-11 sm:w-12 sm:h-12 lg:w-14 lg:h-14 rounded-xl sm:rounded-2xl flex items-center justify-center transition-all duration-300 shadow-xs ${
                         isActive
-                          ? 'bg-[#DC2626] text-white shadow-red-600/30'
+                          ? 'bg-red-50 text-[#DC2626] lg:bg-[#DC2626] lg:text-white lg:shadow-red-600/30'
                           : 'bg-red-50 text-[#DC2626]'
                       }`}
                     >
@@ -308,10 +310,10 @@ export const NosotrosPage: React.FC = () => {
                     </div>
 
                     <span
-                      className={`text-[10px] sm:text-xs font-extrabold uppercase tracking-wider px-2.5 sm:px-3 py-0.5 sm:py-1 rounded-full transition-colors ${
+                      className={`text-[10px] sm:text-xs font-extrabold uppercase tracking-wider px-2.5 sm:px-3 py-1 rounded-full transition-colors ${
                         isActive
-                          ? 'bg-white/10 text-slate-300 border border-white/10'
-                          : 'bg-slate-100 text-slate-500'
+                          ? 'bg-slate-100 text-slate-600 border border-slate-200/60 lg:bg-white/10 lg:text-slate-300 lg:border-white/10'
+                          : 'bg-slate-100 text-slate-600 border border-slate-200/60'
                       }`}
                     >
                       {pilar.highlight}
@@ -320,18 +322,18 @@ export const NosotrosPage: React.FC = () => {
 
                   <h3
                     className={`text-lg sm:text-xl lg:text-2xl font-bold tracking-tight mb-2 sm:mb-3 transition-colors ${
-                      isActive ? 'text-white' : 'text-[#0B192C]'
+                      isActive ? 'text-[#0B192C] lg:text-white' : 'text-[#0B192C]'
                     }`}
                   >
                     {pilar.title}
                   </h3>
 
-                  {/* Descripción: Completa en panel activo, recortada en inactivo */}
+                  {/* Descripción: Completamente desplegada en móvil; en desktop acordeón activo/inactivo */}
                   <p
                     className={`text-xs sm:text-sm md:text-base leading-relaxed transition-all duration-300 ${
                       isActive
-                        ? 'text-slate-300 opacity-100 max-h-96'
-                        : 'text-slate-500 opacity-80 line-clamp-2 lg:line-clamp-3'
+                        ? 'text-slate-600 lg:text-slate-300 opacity-100 max-h-none lg:max-h-96'
+                        : 'text-slate-600 lg:text-slate-500 opacity-100 lg:opacity-80 line-clamp-none lg:line-clamp-3'
                     }`}
                   >
                     {pilar.desc}
@@ -340,10 +342,10 @@ export const NosotrosPage: React.FC = () => {
 
                 {/* Footer Badge de Garantía */}
                 <div
-                  className={`pt-3.5 sm:pt-5 mt-4 sm:mt-6 border-t flex items-center gap-2 text-xs font-bold transition-colors ${
+                  className={`pt-3.5 sm:pt-4 lg:pt-5 mt-4 sm:mt-5 lg:mt-6 border-t flex items-center gap-2 text-xs font-bold transition-colors ${
                     isActive
-                      ? 'border-white/15 text-slate-200'
-                      : 'border-slate-100 text-slate-600'
+                      ? 'border-slate-100 text-slate-700 lg:border-white/15 lg:text-slate-200'
+                      : 'border-slate-100 text-slate-700'
                   }`}
                 >
                   <CheckCircle2 size={15} className="text-[#DC2626] shrink-0" />
