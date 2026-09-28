@@ -83,7 +83,11 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
           <Link
             to="/"
             onClick={handleHomeClick}
-            className={!isNosotros ? 'text-[#DC2626] font-semibold border-b-2 border-[#DC2626] pb-0.5 cursor-pointer' : 'hover:text-[#DC2626] transition-colors cursor-pointer'}
+            className={`relative py-1 transition-all duration-300 cursor-pointer ${
+              !isNosotros
+                ? 'text-[#DC2626] font-bold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#DC2626] after:rounded-full after:transition-all after:duration-300'
+                : 'text-slate-700 hover:text-[#DC2626]'
+            }`}
           >
             Inicio
           </Link>
@@ -91,7 +95,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
           <button
             type="button"
             onClick={() => handleAnchorClick('#servicios')}
-            className="hover:text-[#DC2626] transition-colors cursor-pointer"
+            className="py-1 hover:text-[#DC2626] transition-colors duration-200 cursor-pointer"
           >
             Servicios
           </button>
@@ -99,7 +103,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
           <button
             type="button"
             onClick={() => handleAnchorClick('#por-que-aura')}
-            className="hover:text-[#DC2626] transition-colors cursor-pointer"
+            className="py-1 hover:text-[#DC2626] transition-colors duration-200 cursor-pointer"
           >
             ¿Por qué Aura?
           </button>
@@ -107,7 +111,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
           <button
             type="button"
             onClick={() => handleAnchorClick('#faq')}
-            className="hover:text-[#DC2626] transition-colors cursor-pointer"
+            className="py-1 hover:text-[#DC2626] transition-colors duration-200 cursor-pointer"
           >
             FAQ
           </button>
@@ -115,7 +119,11 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
           <Link
             to="/nosotros"
             onClick={handleNosotrosClick}
-            className={isNosotros ? 'text-[#DC2626] font-semibold border-b-2 border-[#DC2626] pb-0.5' : 'hover:text-[#DC2626] transition-colors'}
+            className={`relative py-1 transition-all duration-300 cursor-pointer ${
+              isNosotros
+                ? 'text-[#DC2626] font-bold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#DC2626] after:rounded-full after:transition-all after:duration-300'
+                : 'text-slate-700 hover:text-[#DC2626]'
+            }`}
           >
             Nosotros
           </Link>

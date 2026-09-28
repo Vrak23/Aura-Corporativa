@@ -171,3 +171,23 @@
 .animate-modal-card-out {
   animation: modalPopOut 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
+/* =========================================
+   10. ANIMACIONES SUAVES DE CAMBIO DE PESTAÑA / RUTA
+   ========================================= */
+@keyframes pageEnterSmooth {
+  0% {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.page-transition-enter {
+  animation: pageEnterSmooth 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  will-change: opacity, transform;
+}
+

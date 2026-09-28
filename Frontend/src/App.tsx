@@ -8,17 +8,39 @@ import { WhatsAppButton } from './components/WhatsAppButton';
 import { ScrollToTopButton } from './components/ScrollToTopButton';
 import { LegalModal } from './components/LegalModal';
 import type { LegalModalType } from './components/LegalModal';
+import { scrollToElementAnimated } from './utils/scrollUtils';
 
-function ScrollToTopOnRoute() {
-  const { pathname } = useLocation();
+function RouteNavigationHandler() {
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-    document.documentElement.scrollTop = 0;
-    document.body.scrollTop = 0;
-  }, [pathname]);
+    if (hash) {
+      // Pequeño timeout para permitir que el DOM y la transición de entrada se monten
+      const timer = setTimeout(() => {
+        scrollToElementAnimated(hash, 80, 700);
+      }, 120);
+      return () => clearTimeout(timer);
+    } else {
+      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+    }
+  }, [pathname, hash]);
 
   return null;
+}
+
+function AnimatedRoutes({ onOpenPrivacy }: { onOpenPrivacy: () => void }) {
+  const location = useLocation();
+
+  return (
+    <div key={location.pathname} className="page-transition-enter flex flex-col grow">
+      <Routes location={location}>
+        <Route path="/" element={<LandingPage onOpenPrivacy={onOpenPrivacy} />} />
+        <Route path="/nosotros" element={<NosotrosPage />} />
+      </Routes>
+    </div>
+  );
 }
 
 export function App() {
@@ -27,16 +49,13 @@ export function App() {
 
   return (
     <BrowserRouter>
-      <ScrollToTopOnRoute />
+      <RouteNavigationHandler />
       <div className="min-h-screen bg-white text-slate-800 flex flex-col font-sans">
         {/* Encabezado con Enrutamiento */}
         <Navbar isMenuOpen={isMobileMenuOpen} onMenuToggle={setIsMobileMenuOpen} />
 
-        {/* Rutas de la Aplicación */}
-        <Routes>
-          <Route path="/" element={<LandingPage onOpenPrivacy={() => setLegalModal('privacy')} />} />
-          <Route path="/nosotros" element={<NosotrosPage />} />
-        </Routes>
+        {/* Rutas de la Aplicación con Transición Suave */}
+        <AnimatedRoutes onOpenPrivacy={() => setLegalModal('privacy')} />
 
         {/* Pie de Página */}
         <Footer 
