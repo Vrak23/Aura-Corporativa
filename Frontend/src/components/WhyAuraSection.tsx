@@ -1,6 +1,7 @@
 import React from 'react';
 import { DollarSign, ShieldCheck, Target, Clock } from 'lucide-react';
 import whyAuraBg from '../assets/por_que_aura.jpg';
+import { ScrollReveal } from './ScrollReveal';
 
 export const WhyAuraSection: React.FC = () => {
   const metrics = [
@@ -47,72 +48,80 @@ export const WhyAuraSection: React.FC = () => {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Title */}
-        <div className="text-center mb-14">
-          <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[#DC2626]" />
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
-            ¿Por qué elegir <span className="text-[#DC2626]">Aura Corporativa</span>?
-          </h2>
-          <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
-            Ventajas estratégicas comprobadas que protegen tu operación y potencian la productividad de tu organización.
-          </p>
-        </div>
+        <ScrollReveal direction="up" delay={0} duration={600}>
+          <div className="text-center mb-14">
+            <div className="mx-auto mb-4 h-1.5 w-12 rounded-full bg-[#DC2626]" />
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight">
+              ¿Por qué elegir <span className="text-[#DC2626]">Aura Corporativa</span>?
+            </h2>
+            <p className="mt-4 text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+              Ventajas estratégicas comprobadas que protegen tu operación y potencian la productividad de tu organización.
+            </p>
+          </div>
+        </ScrollReveal>
 
         {/* 1. Concise Metrics Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 mb-16 pb-10 border-b border-white/10">
           {metrics.map((m, index) => (
-            <div key={index} className="text-center">
-              <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#DC2626] tracking-tight">
-                {m.value}
+            <ScrollReveal key={index} direction="up" delay={index * 80} duration={600} distance={20}>
+              <div className="text-center">
+                <div className="text-2xl sm:text-3xl lg:text-4xl font-black text-[#DC2626] tracking-tight">
+                  {m.value}
+                </div>
+                <div className="text-sm sm:text-base font-bold text-white mt-1">
+                  {m.label}
+                </div>
+                <div className="text-xs text-slate-400 mt-0.5">
+                  {m.sub}
+                </div>
               </div>
-              <div className="text-sm sm:text-base font-bold text-white mt-1">
-                {m.label}
-              </div>
-              <div className="text-xs text-slate-400 mt-0.5">
-                {m.sub}
-              </div>
-            </div>
+            </ScrollReveal>
           ))}
         </div>
 
-        {/* 2. Structured Information in Paragraphs (No Cards) */}
+        {/* 2. Structured Information in Paragraphs */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12 mb-16">
           {pillars.map((item, index) => {
             const Icon = item.icon;
             return (
-              <div key={index} className="flex items-start gap-4 sm:gap-5 text-left">
-                <div className="w-12 h-12 rounded-xl bg-[#DC2626]/20 border border-[#DC2626]/40 text-[#DC2626] flex items-center justify-center shrink-0 mt-1">
-                  <Icon size={24} />
+              <ScrollReveal key={index} direction="up" delay={index * 100} duration={650} distance={25}>
+                <div className="flex items-start gap-4 sm:gap-5 text-left">
+                  <div className="w-12 h-12 rounded-xl bg-[#DC2626]/20 border border-[#DC2626]/40 text-[#DC2626] flex items-center justify-center shrink-0 mt-1 transition-transform duration-300 hover:scale-110">
+                    <Icon size={24} />
+                  </div>
+                  <div>
+                    <h3 className="text-lg sm:text-xl font-bold text-white mb-2 flex items-center gap-2">
+                      <span>{item.title}</span>
+                    </h3>
+                    <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
+                      {item.desc}
+                    </p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg sm:text-xl font-bold text-white mb-2 flex items-center gap-2">
-                    <span>{item.title}</span>
-                  </h3>
-                  <p className="text-sm sm:text-base text-slate-300 leading-relaxed">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
+              </ScrollReveal>
             );
           })}
         </div>
 
-        {/* 3. Bottom Assurance Callout (Untouched) */}
-        <div className="bg-[#0B192C]/90 text-white rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl border border-white/10 backdrop-blur-md">
-          <div className="max-w-2xl text-center md:text-left">
-            <h4 className="text-xl sm:text-2xl font-bold mb-2">
-              Transformamos la gestión de talento en una ventaja competitiva
-            </h4>
-            <p className="text-sm text-slate-300 leading-relaxed">
-              Diseñamos propuestas a la medida de tu sector y volumen de colaboradores, garantizando continuidad y tranquilidad.
-            </p>
+        {/* 3. Bottom Assurance Callout */}
+        <ScrollReveal direction="scale" delay={150} duration={700}>
+          <div className="bg-[#0B192C]/90 text-white rounded-3xl p-8 sm:p-10 flex flex-col md:flex-row items-center justify-between gap-6 shadow-2xl border border-white/10 backdrop-blur-md">
+            <div className="max-w-2xl text-center md:text-left">
+              <h4 className="text-xl sm:text-2xl font-bold mb-2">
+                Transformamos la gestión de talento en una ventaja competitiva
+              </h4>
+              <p className="text-sm text-slate-300 leading-relaxed">
+                Diseñamos propuestas a la medida de tu sector y volumen de colaboradores, garantizando continuidad y tranquilidad.
+              </p>
+            </div>
+            <a
+              href="#contacto"
+              className="shrink-0 inline-flex items-center justify-center px-6 py-3.5 bg-[#DC2626] hover:bg-red-700 text-white font-bold text-sm rounded-xl shadow-md transition-all active:scale-95 cursor-pointer"
+            >
+              Solicitar Asesoría
+            </a>
           </div>
-          <a
-            href="#contacto"
-            className="shrink-0 inline-flex items-center justify-center px-6 py-3.5 bg-[#DC2626] hover:bg-red-700 text-white font-bold text-sm rounded-xl shadow-md transition-all active:scale-95"
-          >
-            Solicitar Asesoría
-          </a>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

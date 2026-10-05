@@ -1,6 +1,6 @@
 import React from 'react';
 import heroImage from '../assets/hero_corporate.jpg';
-
+import { ScrollReveal } from './ScrollReveal';
 import { scrollToElementAnimated } from '../utils/scrollUtils';
 
 export const Hero: React.FC = () => {
@@ -28,33 +28,43 @@ export const Hero: React.FC = () => {
 
       <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-20 w-full">
         <div className="max-w-3xl">
-          <div className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-slate-300">
-            <span className="h-px w-10 bg-[#DC2626]" />
-            <span>Confianza que impulsa</span>
-          </div>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
-            Reduce tu carga operativa,<br className="hidden sm:inline" /> enfócate en tu negocio
-          </h1>
-          <p className="mt-5 text-lg sm:text-xl text-slate-200 font-normal leading-relaxed">
-            Soluciones integrales en Tercerización y Outsourcing Empresarial
-          </p>
+          <ScrollReveal direction="down" delay={0} duration={600} distance={15}>
+            <div className="mb-5 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.24em] text-slate-300">
+              <span className="h-px w-10 bg-[#DC2626]" />
+              <span>Confianza que impulsa</span>
+            </div>
+          </ScrollReveal>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
-            <a
-              href="#contacto"
-              onClick={handleScrollTo('#contacto')}
-              className="inline-flex items-center justify-center px-7 py-3.5 text-base font-bold text-white bg-[#DC2626] hover:bg-red-700 active:scale-95 rounded-md transition-all shadow-md cursor-pointer"
-            >
-              Solicita una Asesoría
-            </a>
-            <a
-              href="#servicios"
-              onClick={handleScrollTo('#servicios')}
-              className="inline-flex items-center justify-center px-7 py-3.5 text-base font-bold text-slate-900 bg-white hover:bg-slate-100 active:scale-95 rounded-md transition-all shadow-md cursor-pointer"
-            >
-              Más Información
-            </a>
-          </div>
+          <ScrollReveal direction="up" delay={120} duration={700} distance={25}>
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-tight text-white">
+              Reduce tu carga operativa,<br className="hidden sm:inline" /> enfócate en tu negocio
+            </h1>
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={240} duration={700} distance={20}>
+            <p className="mt-5 text-lg sm:text-xl text-slate-200 font-normal leading-relaxed">
+              Soluciones integrales en Tercerización y Outsourcing Empresarial
+            </p>
+          </ScrollReveal>
+
+          <ScrollReveal direction="up" delay={360} duration={700} distance={20}>
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <a
+                href="#contacto"
+                onClick={handleScrollTo('#contacto')}
+                className="inline-flex items-center justify-center px-7 py-3.5 text-base font-bold text-white bg-[#DC2626] hover:bg-red-700 active:scale-95 rounded-md transition-all shadow-md cursor-pointer"
+              >
+                Solicita una Asesoría
+              </a>
+              <a
+                href="#servicios"
+                onClick={handleScrollTo('#servicios')}
+                className="inline-flex items-center justify-center px-7 py-3.5 text-base font-bold text-slate-900 bg-white hover:bg-slate-100 active:scale-95 rounded-md transition-all shadow-md cursor-pointer"
+              >
+                Más Información
+              </a>
+            </div>
+          </ScrollReveal>
         </div>
       </div>
     </section>
