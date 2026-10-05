@@ -9,22 +9,33 @@ import { ScrollToTopButton } from './components/ScrollToTopButton';
 import { LegalModal } from './components/LegalModal';
 import type { LegalModalType } from './components/LegalModal';
 import { scrollToElementAnimated } from './utils/scrollUtils';
+import { initScrollReveal } from './utils/scrollReveal';
 
 function RouteNavigationHandler() {
   const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    // Inicializar y observar elementos reveal al cambiar de ruta
+    const cleanupReveal = initScrollReveal();
+
     if (hash) {
       // Pequeño timeout para permitir que el DOM y la transición de entrada se monten
       const timer = setTimeout(() => {
         scrollToElementAnimated(hash, 80, 700);
       }, 120);
-      return () => clearTimeout(timer);
+      return () => {
+        clearTimeout(timer);
+        cleanupReveal?.();
+      };
     } else {
       window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
       document.documentElement.scrollTop = 0;
       document.body.scrollTop = 0;
     }
+
+    return () => {
+      cleanupReveal?.();
+    };
   }, [pathname, hash]);
 
   return null;
