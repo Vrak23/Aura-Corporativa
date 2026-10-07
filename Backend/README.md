@@ -36,6 +36,31 @@ cuentas con `is_admin = true`. Para configurar localmente:
 El administrador puede crear, editar y eliminar noticias. El blog público muestra
 únicamente las publicaciones activas en `/blog`.
 
+## Despliegue en Railway y Vercel
+
+El backend está preparado para desplegarse desde la carpeta `Backend` en Railway.
+Configura el directorio raíz del servicio como `/Backend`, añade un servicio
+PostgreSQL y define estas variables en Railway:
+
+- `APP_ENV=production`
+- `APP_DEBUG=false`
+- `APP_KEY` (genera una clave con `php artisan key:generate --show`)
+- `APP_URL` (dominio HTTPS público del servicio de Railway)
+- `FRONTEND_URL=https://aura-corporativa.vercel.app`
+- `DB_CONNECTION=pgsql`
+- `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME` y `DB_PASSWORD` (referencias
+  a las variables correspondientes del servicio PostgreSQL)
+- `BLOG_ADMIN_EMAIL` y `BLOG_ADMIN_PASSWORD` (credenciales privadas del admin;
+  la contraseña debe tener al menos 8 caracteres)
+
+El archivo `railway.json` ejecuta migraciones y crea/actualiza el administrador
+antes de cada despliegue. No guardes claves ni contraseñas en el repositorio.
+
+Después de obtener el dominio HTTPS de la API, configura en Vercel la variable
+`VITE_API_BASE_URL` con el valor `https://<dominio-de-la-api>/api` y vuelve a
+desplegar el frontend. El dominio debe apuntar al servicio Laravel, no a la base
+de datos.
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
