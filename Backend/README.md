@@ -28,10 +28,10 @@ cuentas con `is_admin = true`. Para configurar localmente:
 
 1. Copia `.env.example` a `.env`, configura la base de datos, `BLOG_ADMIN_EMAIL` y
    `BLOG_ADMIN_PASSWORD` (mínimo 8 caracteres).
-2. Instala dependencias, genera la clave y ejecuta `php artisan migrate`.
-3. Ejecuta `php artisan db:seed --class=BlogAdminSeeder` para habilitar la cuenta
-   administradora. No hay registro de usuarios ni enlace público al inicio de sesión.
-4. Inicia la API y abre `/admin-blog` en el frontend. El panel solicita solo la clave.
+2. Instala dependencias, genera la clave y ejecuta `php artisan migrate --seed`
+   para crear los servicios y habilitar la cuenta administradora. No hay registro
+   de usuarios ni enlace público al inicio de sesión.
+3. Inicia la API y abre `/admin-blog` en el frontend. El panel solicita solo la clave.
 
 El administrador puede crear, editar y eliminar noticias. El blog público muestra
 únicamente las publicaciones activas en `/blog`.

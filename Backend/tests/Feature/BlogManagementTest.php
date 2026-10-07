@@ -11,6 +11,25 @@ class BlogManagementTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_database_seeder_creates_the_blog_administrator(): void
+    {
+        config([
+            'blog.admin_email' => 'admin@example.com',
+            'blog.admin_password' => 'secure-password',
+        ]);
+
+        $this->seed(\Database\Seeders\DatabaseSeeder::class);
+
+        $this->assertDatabaseHas('users', [
+            'email' => 'admin@example.com',
+            'is_admin' => true,
+        ]);
+
+        $this->postJson('/api/admin/login', [
+            'password' => 'secure-password',
+        ])->assertOk();
+    }
+
     public function test_only_administrators_can_sign_in_and_manage_blog_posts(): void
     {
         $administrator = User::factory()->create([
