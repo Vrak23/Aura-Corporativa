@@ -17,7 +17,9 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const isHome = location.pathname === '/';
   const isNosotros = location.pathname === '/nosotros';
+  const isBlog = location.pathname === '/blog' || location.pathname.startsWith('/blog/');
 
   const handleToggle = (open: boolean) => {
     setInternalOpen(open);
@@ -28,7 +30,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
     e.preventDefault();
     handleToggle(false);
 
-    if (isNosotros) {
+    if (!isHome) {
       navigate('/');
       window.scrollTo(0, 0);
     } else {
@@ -55,7 +57,7 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
 
   const handleAnchorClick = (href: string) => {
     handleToggle(false);
-    if (isNosotros) {
+    if (!isHome) {
       navigate('/' + href);
     } else {
       scrollToElementAnimated(href, 80, 800);
@@ -84,12 +86,27 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
             to="/"
             onClick={handleHomeClick}
             className={`relative py-1 transition-all duration-300 cursor-pointer ${
-              !isNosotros
+              isHome
                 ? 'text-[#DC2626] font-bold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#DC2626] after:rounded-full after:transition-all after:duration-300'
                 : 'text-slate-700 hover:text-[#DC2626]'
             }`}
           >
             Inicio
+          </Link>
+
+          <Link
+            to="/blog"
+            onClick={() => {
+              handleToggle(false);
+              window.scrollTo(0, 0);
+            }}
+            className={`relative py-1 transition-all duration-300 cursor-pointer ${
+              isBlog
+                ? 'text-[#DC2626] font-bold after:absolute after:bottom-0 after:left-0 after:w-full after:h-[2.5px] after:bg-[#DC2626] after:rounded-full after:transition-all after:duration-300'
+                : 'text-slate-700 hover:text-[#DC2626]'
+            }`}
+          >
+            Blog
           </Link>
 
           <button
@@ -166,9 +183,20 @@ export const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, onMenuToggle }) => {
               <Link
                 to="/"
                 onClick={handleHomeClick}
-                className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center transition-colors cursor-pointer ' + (!isNosotros ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
+                className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center transition-colors cursor-pointer ' + (isHome ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
               >
                 <span>Inicio</span>
+              </Link>
+
+              <Link
+                to="/blog"
+                onClick={() => {
+                  handleToggle(false);
+                  window.scrollTo(0, 0);
+                }}
+                className={'text-lg font-semibold py-2 px-3 rounded-lg flex items-center transition-colors ' + (isBlog ? 'bg-red-50 text-[#DC2626]' : 'text-slate-800 hover:bg-slate-50')}
+              >
+                <span>Blog</span>
               </Link>
 
               <button

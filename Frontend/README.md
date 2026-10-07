@@ -1,5 +1,11 @@
 # React + TypeScript + Vite
 
+## Blog
+
+El blog público está en `/blog` y el panel privado del administrador en `/admin-blog`.
+Configura `VITE_API_BASE_URL` para apuntar a la API Laravel; por defecto es
+`http://localhost:8000/api`. El panel solo solicita la contraseña del administrador.
+
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
 Currently, two official plugins are available:

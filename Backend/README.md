@@ -21,6 +21,21 @@ Laravel is a web application framework with expressive, elegant syntax. We belie
 
 Laravel is accessible, powerful, and provides tools required for large, robust applications.
 
+## Blog corporativo
+
+El blog público expone `GET /api/blog`; la administración usa Sanctum y solo admite
+cuentas con `is_admin = true`. Para configurar localmente:
+
+1. Copia `.env.example` a `.env`, configura la base de datos, `BLOG_ADMIN_EMAIL` y
+   `BLOG_ADMIN_PASSWORD` (mínimo 8 caracteres).
+2. Instala dependencias, genera la clave y ejecuta `php artisan migrate`.
+3. Ejecuta `php artisan db:seed --class=BlogAdminSeeder` para habilitar la cuenta
+   administradora. No hay registro de usuarios ni enlace público al inicio de sesión.
+4. Inicia la API y abre `/admin-blog` en el frontend. El panel solicita solo la clave.
+
+El administrador puede crear, editar y eliminar noticias. El blog público muestra
+únicamente las publicaciones activas en `/blog`.
+
 ## Learning Laravel
 
 Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.

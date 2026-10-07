@@ -35,24 +35,28 @@ class AuthController extends Controller
     public function login(Request $request): JsonResponse
     {
         $validated = $request->validate([
-            'email' => 'required|string|email',
             'password' => 'required|string',
         ]);
 
-        $user = User::where('email', $validated['email'])->first();
+        $user = User::where('email', config('blog.admin_email'))->first();
 
-        if (! $user || ! Hash::check($validated['password'], $user->password)) {
+        if (! $user || ! Hash::check($validated['password'], $user->password) || ! $user->is_admin) {
             throw ValidationException::withMessages([
-                'email' => ['Las credenciales no son correctas.'],
+                'password' => ['La clave de acceso no es correcta.'],
             ]);
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
-            'user' => $user,
+            'user' => $user->only(['id', 'name', 'email']),
             'token' => $token,
         ]);
+    }
+
+    public function me(Request $request): JsonResponse
+    {
+        return response()->json($request->user()->only(['id', 'name', 'email']));
     }
 
     public function logout(Request $request): JsonResponse

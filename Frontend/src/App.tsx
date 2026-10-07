@@ -3,6 +3,8 @@ import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { LandingPage } from './pages/LandingPage';
 import { NosotrosPage } from './pages/NosotrosPage';
+import { BlogPage } from './pages/BlogPage';
+import { BlogAdminPage } from './pages/BlogAdminPage';
 import { Footer } from './components/Footer';
 import { WhatsAppButton } from './components/WhatsAppButton';
 import { ScrollToTopButton } from './components/ScrollToTopButton';
@@ -49,6 +51,9 @@ function AnimatedRoutes({ onOpenPrivacy }: { onOpenPrivacy: () => void }) {
       <Routes location={location}>
         <Route path="/" element={<LandingPage onOpenPrivacy={onOpenPrivacy} />} />
         <Route path="/nosotros" element={<NosotrosPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPage />} />
+        <Route path="/admin-blog" element={<BlogAdminPage />} />
       </Routes>
     </div>
   );
